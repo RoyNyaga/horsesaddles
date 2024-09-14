@@ -1,6 +1,4 @@
 import React from "react";
-import { CgAdd } from "react-icons/cg";
-import { CgRedo } from "react-icons/cg";
 
 const BannerBottom = () => {
   return (

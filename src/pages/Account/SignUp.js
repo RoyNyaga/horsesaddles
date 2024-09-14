@@ -26,7 +26,6 @@ const SignUp = () => {
   const [errCountry, setErrCountry] = useState("");
   const [errZip, setErrZip] = useState("");
   // ============= Error Msg End here ===================
-  const [successMsg, setSuccessMsg] = useState("");
   // ============= Event Handler Start here =============
   const handleName = (e) => {
     setClientName(e.target.value);
@@ -211,21 +210,6 @@ const SignUp = () => {
         </div>
       </div>
       <div className="w-full lgl:w-[500px] h-full flex flex-col justify-center">
-        {successMsg ? (
-          <div className="w-[500px]">
-            <p className="w-full px-4 py-10 text-green-500 font-medium font-titleFont">
-              {successMsg}
-            </p>
-            <Link to="/signin">
-              <button
-                className="w-full h-10 bg-primeColor rounded-md text-gray-200 text-base font-titleFont font-semibold 
-            tracking-wide hover:bg-black hover:text-white duration-300"
-              >
-                Sign in
-              </button>
-            </Link>
-          </div>
-        ) : (
           <form className="w-full lgl:w-[500px] h-screen flex items-center justify-center">
             <div className="px-6 py-4 w-full h-[96%] flex flex-col justify-start overflow-y-scroll scrollbar-thin scrollbar-thumb-primeColor">
               <h1 className="font-titleFont underline underline-offset-4 decoration-[1px] font-semibold text-2xl mdl:text-3xl mb-4">
@@ -418,7 +402,7 @@ const SignUp = () => {
               </div>
             </div>
           </form>
-        )}
+        
       </div>
     </div>
   );

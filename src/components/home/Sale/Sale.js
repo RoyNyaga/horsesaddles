@@ -1,10 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  saleImgOne,
-  saleImgTwo,
-  saleImgThree,
-} from "../../../assets/images/index";
 import Image from "../../designLayouts/Image";
 import ShopNow from "../../designLayouts/buttons/ShopNow";
 

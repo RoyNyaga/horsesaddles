@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Image from "../../designLayouts/Image";
 import Badge from "./Badge";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
 import HoverDetail from "./hoverDetail";
 import { missingImage } from "../../../assets/images";
 

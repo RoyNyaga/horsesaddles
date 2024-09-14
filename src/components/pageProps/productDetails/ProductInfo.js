@@ -4,10 +4,6 @@ import { addToCart } from "../../../redux/orebiSlice";
 
 const ProductInfo = ({ productInfo }) => {
   console.log({ productInfo })
-  const highlightStyle = {
-    color: "#d0121a", // Change this to the desired color
-    fontWeight: "bold", // Change this to the desired font weight
-  };
 
 
   const dispatch = useDispatch();

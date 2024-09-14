@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { missingImage } from '../../assets/images';
 import supabase from '../../supabase';
@@ -26,17 +26,17 @@ const EditProductPage = () => {
     return randomStrings;
   }
 
-  const getProduct = async () => {
-    let { data: product_horsesaddle, error } = await supabase
-      .from('product_horsesaddle')
-      .select("*")
-      // Filters
-      .eq('id', id)
-    setProduct(product_horsesaddle[0])
-  }
+  // const getProduct = async () => {
+  //   let { data: product_horsesaddle } = await supabase
+  //     .from('product_horsesaddle')
+  //     .select("*")
+  //     // Filters
+  //     .eq('id', id)
+  //   setProduct(product_horsesaddle[0])
+  // }
 
   const updateProduct = async (img_url, img_id) => {
-    const { data, error } = await supabase
+    const { data } = await supabase
       .from('product_horsesaddle')
       .update({ img_url, img_id })
       .eq('id', id)
@@ -45,9 +45,18 @@ const EditProductPage = () => {
     setProduct(data[0])
   }
 
+  const getProduct = useCallback(async () => {
+    let { data: product_horsesaddle } = await supabase
+      .from('product_horsesaddle')
+      .select("*")
+      // Filters
+      .eq('id', id)
+    setProduct(product_horsesaddle[0])
+  }, [id]);
+
   useEffect(() => {
     getProduct()
-  }, []);
+  }, [getProduct]);
 
   const handleSubmitPhotoForm = async (event) => {
     event.preventDefault();
@@ -86,8 +95,8 @@ const EditProductPage = () => {
       <h1 className='text-center my-4'>Edit this product {id} </h1>
       <div className='row'>
         <div className='col-md-3'>
-          {product.img_url ? <img className="w-full" src={product.img_url} alt="missing photo" />
-            : <img className="w-full" src={missingImage} alt="missing photo" />}
+          {product.img_url ? <img className="w-full" src={product.img_url} alt="missing" />
+            : <img className="w-full" src={missingImage} alt="missing" />}
           <br />
           {!showForm ?
             <button onClick={() => { setShowForm(true) }} className='btn btn-secondary'>Change Photo</button>

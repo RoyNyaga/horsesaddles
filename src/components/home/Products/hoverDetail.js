@@ -1,8 +1,5 @@
 import React from 'react'
 import { useDispatch } from "react-redux";
-
-import { BsSuitHeartFill } from "react-icons/bs";
-import { GiReturnArrow } from "react-icons/gi";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdOutlineLabelImportant } from "react-icons/md";
 import { addToCart } from "../../../redux/orebiSlice";

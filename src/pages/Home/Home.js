@@ -12,7 +12,7 @@ const Home = () => {
   const [products, setProducts] = useState([])
 
   const getProducts = async () => {
-    let { data: product_horsesaddle, error } = await supabase
+    let { data: product_horsesaddle } = await supabase
       .from('product_horsesaddle')
       .select('*')
       setProducts(product_horsesaddle)

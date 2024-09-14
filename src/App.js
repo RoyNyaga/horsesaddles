@@ -25,11 +25,10 @@ import Shop from "./pages/Shop/Shop";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import supabase from "./supabase";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Dashboard from "./pages/Dashboard/dashboard";
 import NewProductPage from "./pages/Dashboard/newProductPage";
 import EditProductPage from "./pages/Dashboard/editProductPage";
-import Orders from "./pages/Order/orders";
 import ProfilePage from "./pages/Profile/profilePage";
 
 const Layout = () => {
@@ -38,7 +37,7 @@ const Layout = () => {
   const [profile, setProfile] = useState({})
 
   const getProfile = async (user) => {
-    let { data: profile, error } = await supabase
+    let { data: profile } = await supabase
       .from('profile_horsesadle')
       .select("*")
       // Filters
@@ -46,19 +45,20 @@ const Layout = () => {
     setProfile(profile[0])
   }
 
-  const setUserLogin = async () => {
-    const { data: { user } } = await supabase.auth.getUser()
-    console.log({ user })
+  // Memoize setUserLogin to prevent re-creation on every render
+  const setUserLogin = useCallback(async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    console.log({ user });
     if (user) {
-      setIsLoggedIn(true)
-      setCurrentUser(user)
-      getProfile(user)
+      setIsLoggedIn(true);
+      setCurrentUser(user);
+      getProfile(user);
     }
-  }
+  }, []);
 
   useEffect(() => {
     setUserLogin()
-  }, [])
+  }, [setUserLogin])
 
 
   return (

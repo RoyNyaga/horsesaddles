@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import Product from '../../components/home/Products/Product';
 import supabase from '../../supabase';
-import ProductForm from './form';
 
 const Dashboard = () => {
   const [products, setProducts] = useState([])
 
   const getProducts = async () => {
-    let { data: product_horsesaddle, error } = await supabase
+    let { data: product_horsesaddle } = await supabase
       .from('product_horsesaddle')
       .select('*')
       setProducts(product_horsesaddle)
