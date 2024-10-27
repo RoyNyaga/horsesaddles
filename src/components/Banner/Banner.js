@@ -46,7 +46,7 @@ const CustomSlide = ({ Subtext, imgSrc, text, buttonLink, buttonText }) => (
       </Link>
     </div>
     <div style={{ marginLeft: "100px" }}>
-      <Image imgSrc={imgSrc} />
+      <Image className={"carosel-images"} imgSrc={imgSrc} />
     </div>
   </div>
 );
@@ -146,32 +146,33 @@ const Banner = () => {
 
   const slides = [
     {
-      imgSrc: "https://m.media-amazon.com/images/I/71dvRac+rFL._AC_SX300_SY300_.jpg",
-      text: "Enhance Your Printing Experience",
+      imgSrc: "https://res.cloudinary.com/it-s-tech/image/upload/v1730030603/horse-saddles/456535234_469828199265173_3415394109612119512_n_coibch.jpg",
+      text: "Upgrade Your Riding Experience",
       Subtext:
-        "Explore our premium printers and consumables for exceptional results",
+        "Discover our premium horse saddles, designed for comfort and durability. Ride with style and confidence.",
       buttonLink: "/offer",
       buttonText: "Shop Now",
     },
     {
-      imgSrc: "https://m.media-amazon.com/images/I/51UJ+flhVYL._AC_SX679_.jpg",
-      text: "Quality Printing Solutions",
+      imgSrc: "https://res.cloudinary.com/it-s-tech/image/upload/v1730030603/horse-saddles/454839928_460568786857781_6536490749902971828_n_mlfzw3.jpg",
+      text: "Quality Saddles for Every Rider",
       Subtext:
-        "Discover our wide range of printers and consumables designed for professional printing needs.",
+        "Explore our collection of saddles made to suit all riding styles and preferences. Find the perfect fit for you and your horse.",
       buttonLink: "/shop",
-      buttonText: "About-us",
+      buttonText: "About Us",
     },
     {
-      imgSrc: "https://m.media-amazon.com/images/I/51gfmJ+sMUL._AC_SX679_.jpg",
-      text: "Efficiency Redefined",
+      imgSrc: "https://res.cloudinary.com/it-s-tech/image/upload/v1730030603/horse-saddles/463988940_511029245145068_1804832544002803947_n_yplk3h.jpg",
+      text: "Comfort Meets Performance",
       Subtext:
-        "Maximize productivity with our advanced printers and high-quality consumables. ",
+        "Experience the difference with our expertly crafted saddles. Enhance your ride with unmatched comfort and support.",
       buttonLink: "/contact",
-      buttonText: "Contact-us",
+      buttonText: "Contact Us",
     },
 
     // Add more slides as needed
   ];
+
   return (
     <div className="w-full bg-white">
       <Slider {...settings}>

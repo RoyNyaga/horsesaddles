@@ -35,4 +35,9 @@ nav .active li {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+.carosel-images{
+  width: 500px;
+  height: 350px;
+}
 /* ============= NavLink active End here ================ */
