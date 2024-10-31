@@ -3,16 +3,15 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { MdClose } from "react-icons/md";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { motion } from "framer-motion";
-import { logo, logoLight } from "../../../assets/images";
+import { logo } from "../../../assets/images";
 import Image from "../../designLayouts/Image";
 import { navBarList } from "../../../constants";
 import Flex from "../../designLayouts/Flex";
+import supabase from "../../../supabase";
 
-const Header = ({ isLoggedIn, user, profile}) => {
+const Header = ({ isLoggedIn, user, profile }) => {
   const [showMenu, setShowMenu] = useState(true);
   const [sidenav, setSidenav] = useState(false);
-  const [category, setCategory] = useState(false);
-  const [brand, setBrand] = useState(false);
   const location = useLocation();
   useEffect(() => {
     let ResponsiveMenu = () => {
@@ -25,6 +24,13 @@ const Header = ({ isLoggedIn, user, profile}) => {
     ResponsiveMenu();
     window.addEventListener("resize", ResponsiveMenu);
   }, []);
+
+  const signOutUser = async () => {
+    let { error } = await supabase.auth.signOut()
+    if (!error) {
+      window.location.href = "/signIn"
+    }
+  }
 
   return (
     <div className="w-full h-20 bg-white sticky top-0 z-50 border-b-[1px] border-b-gray-200">
@@ -54,30 +60,31 @@ const Header = ({ isLoggedIn, user, profile}) => {
                       <li>{title}</li>
                     </NavLink>
                   ))}
-                  { isLoggedIn && profile.id &&
+                  {isLoggedIn && profile.id &&
                     <Link
-                    className="flex font-normal hover:font-bold w-20 h-6 justify-center items-center px-12 text-base text-[#767676] hover:underline underline-offset-[4px] decoration-[1px] hover:text-[#262626] md:border-r-[2px] border-r-gray-300 hoverEffect last:border-r-0"
-                    to={"/"}>{profile.full_name.split(" ")[0]}</Link>
+                      className="flex font-normal hover:font-bold w-20 h-6 justify-center items-center px-12 text-base text-[#767676] hover:underline underline-offset-[4px] decoration-[1px] hover:text-[#262626] md:border-r-[2px] border-r-gray-300 hoverEffect last:border-r-0"
+                      to={`/dashboard/profile/${profile.id}`}>{profile.full_name.split(" ")[0]}</Link>
                   }
 
                   {
-                    isLoggedIn && profile.is_admin && 
+                    isLoggedIn && profile.is_admin &&
                     <Link
-                    className="flex font-normal hover:font-bold w-20 h-6 justify-center items-center px-12 text-base text-[#767676] hover:underline underline-offset-[4px] decoration-[1px] hover:text-[#262626] md:border-r-[2px] border-r-gray-300 hoverEffect last:border-r-0"
-                    to={"/dashboard"}>Dashboard</Link>
+                      className="flex font-normal hover:font-bold w-20 h-6 justify-center items-center px-12 text-base text-[#767676] hover:underline underline-offset-[4px] decoration-[1px] hover:text-[#262626] md:border-r-[2px] border-r-gray-300 hoverEffect last:border-r-0"
+                      to={"/dashboard"}>Dashboard</Link>
                   }
 
-                  { isLoggedIn ?
-                    <Link
-                    className="flex font-normal hover:font-bold w-20 h-6 justify-center items-center px-12 text-base text-[#767676] hover:underline underline-offset-[4px] decoration-[1px] hover:text-[#262626] md:border-r-[2px] border-r-gray-300 hoverEffect last:border-r-0"
-                    to={"/"}>LogOut</Link>
+                  {isLoggedIn ?
+
+                    <span onClick={() => signOutUser()} className="flex font-normal hover:font-bold w-20 h-6 justify-center items-center px-12 text-base text-[#767676] hover:underline underline-offset-[4px] decoration-[1px] hover:text-[#262626] md:border-r-[2px] border-r-gray-300 hoverEffect last:border-r-0">
+                      Log Out
+                    </span>
                     :
                     <Link
-                    className="flex font-normal hover:font-bold w-20 h-6 justify-center items-center px-12 text-base text-[#767676] hover:underline underline-offset-[4px] decoration-[1px] hover:text-[#262626] md:border-r-[2px] border-r-gray-300 hoverEffect last:border-r-0"
-                    to={"/signin"}>LogIn</Link>
+                      className="flex font-normal hover:font-bold w-20 h-6 justify-center items-center px-12 text-base text-[#767676] hover:underline underline-offset-[4px] decoration-[1px] hover:text-[#262626] md:border-r-[2px] border-r-gray-300 hoverEffect last:border-r-0"
+                      to={"/signin"}>LogIn</Link>
                   }
-                  
-                    
+
+
                 </>
               </motion.ul>
             )}
@@ -96,7 +103,7 @@ const Header = ({ isLoggedIn, user, profile}) => {
                   <div className="w-full h-full bg-primeColor p-6">
                     <img
                       className="w-28 mb-6"
-                      src={logoLight}
+                      src={logo}
                       alt="logoLight"
                     />
                     <ul className="text-gray-200 flex flex-col gap-2">
@@ -114,53 +121,42 @@ const Header = ({ isLoggedIn, user, profile}) => {
                           </NavLink>
                         </li>
                       ))}
+
+                      {isLoggedIn && profile.id &&
+                        <NavLink
+                          to={"/"}
+                          state={{ data: location.pathname.split("/")[1] }}
+                          onClick={() => setSidenav(false)}
+                        >
+                          {profile.full_name.split(" ")[0]}
+                        </NavLink>
+                      }
+
+                      {
+                        isLoggedIn && profile.is_admin &&
+                        <NavLink
+                          to={"/dashboard"}
+                          state={{ data: location.pathname.split("/")[1] }}
+                          onClick={() => setSidenav(false)}
+                        >
+                          Dashboard
+                        </NavLink>
+                      }
+
+                      {isLoggedIn ?
+                        <Link
+                          className="flex font-normal text-white"
+                          to={"/"}>LogOut</Link>
+                        :
+                        <NavLink
+                          to={"/signin"}
+                          state={{ data: location.pathname.split("/")[1] }}
+                          onClick={() => setSidenav(false)}
+                        >
+                          "signin"
+                        </NavLink>
+                      }
                     </ul>
-                    <div className="mt-4">
-                      <h1
-                        onClick={() => setCategory(!category)}
-                        className="flex justify-between text-base cursor-pointer items-center font-titleFont mb-2"
-                      >
-                        Shop by Category{" "}
-                        <span className="text-lg">{category ? "-" : "+"}</span>
-                      </h1>
-                      {category && (
-                        <motion.ul
-                          initial={{ y: 15, opacity: 0 }}
-                          animate={{ y: 0, opacity: 1 }}
-                          transition={{ duration: 0.4 }}
-                          className="text-sm flex flex-col gap-1"
-                        >
-                          <li className="headerSedenavLi">New Arrivals</li>
-                          <li className="headerSedenavLi">Gudgets</li>
-                          <li className="headerSedenavLi">Accessories</li>
-                          <li className="headerSedenavLi">Electronics</li>
-                          <li className="headerSedenavLi">Others</li>
-                        </motion.ul>
-                      )}
-                    </div>
-                    <div className="mt-4">
-                      <h1
-                        onClick={() => setBrand(!brand)}
-                        className="flex justify-between text-base cursor-pointer items-center font-titleFont mb-2"
-                      >
-                        Shop by Brand
-                        <span className="text-lg">{brand ? "-" : "+"}</span>
-                      </h1>
-                      {brand && (
-                        <motion.ul
-                          initial={{ y: 15, opacity: 0 }}
-                          animate={{ y: 0, opacity: 1 }}
-                          transition={{ duration: 0.4 }}
-                          className="text-sm flex flex-col gap-1"
-                        >
-                          <li className="headerSedenavLi">New Arrivals</li>
-                          <li className="headerSedenavLi">Gudgets</li>
-                          <li className="headerSedenavLi">Accessories</li>
-                          <li className="headerSedenavLi">Electronics</li>
-                          <li className="headerSedenavLi">Others</li>
-                        </motion.ul>
-                      )}
-                    </div>
                   </div>
                   <span
                     onClick={() => setSidenav(false)}

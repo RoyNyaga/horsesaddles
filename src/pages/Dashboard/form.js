@@ -51,6 +51,7 @@ const ProductForm = ({ product = {}, type = "create" }) => {
       color: formData.get("color"),
       material: formData.get("material"),
       description: formData.get("description"),
+      has_badge: formData.get("has_badge")
     }
     console.log({ payload })
     if (type === "create") {

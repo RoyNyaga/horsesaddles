@@ -21,14 +21,16 @@ const Cart = () => {
     setTotalAmt(price);
   }, [products]);
   useEffect(() => {
-    if (totalAmt <= 200) {
-      setShippingCharge(30);
-    } else if (totalAmt <= 400) {
-      setShippingCharge(25);
-    } else if (totalAmt > 401) {
-      setShippingCharge(20);
+    if (totalAmt <= 1000) {
+      setShippingCharge(8);
+    } else if (totalAmt <= 1500) {
+      setShippingCharge(10);
+    } else if (totalAmt > 1500) {
+      setShippingCharge(12);
     }
   }, [totalAmt]);
+
+  console.log("products", products)
   return (
     <div className="max-w-container mx-auto px-4">
       <Breadcrumbs title="Cart" />
@@ -79,7 +81,7 @@ const Cart = () => {
                   </span>
                 </p>
                 <p className="flex items-center justify-between border-[1px] border-gray-400 border-b-0 py-1.5 text-lg px-4 font-medium">
-                  Shipping Charge
+                  Delivery Fee
                   <span className="font-semibold tracking-wide font-titleFont">
                     ${shippingCharge}
                   </span>
@@ -92,9 +94,9 @@ const Cart = () => {
                 </p>
               </div>
               <div className="flex justify-end">
-                <Link to="/paymentgateway">
+                <Link to={`/new-order?amount=${totalAmt}&deliver_fee=${shippingCharge}`}>
                   <button className="w-52 h-10 bg-primeColor text-white hover:bg-black duration-300">
-                    Proceed to Checkout
+                    Place Your Order
                   </button>
                 </Link>
               </div>
@@ -119,10 +121,7 @@ const Cart = () => {
             <h1 className="font-titleFont text-xl font-bold uppercase">
               Your Cart feels lonely.
             </h1>
-            <p className="text-sm text-center px-10 -mt-2">
-              Your Shopping cart lives to serve. Give it purpose - fill it with
-              books, electronics, videos, etc. and make it happy.
-            </p>
+           
             <Link to="/shop">
               <button className="bg-primeColor rounded-md cursor-pointer hover:bg-black active:bg-gray-900 px-8 py-2 font-titleFont font-semibold text-lg text-gray-200 hover:text-white duration-300">
                 Continue Shopping

@@ -39,13 +39,13 @@ const CustomSlide = ({ Subtext, imgSrc, text, buttonLink, buttonText }) => (
         {Subtext}
       </p>
 
-      <Link to="/about">
+      <Link to="/shop">
         <button className="bg-primeColor text-white text-lg font-bodyFont w-[185px] h-[50px] hover:bg-black duration-300 font-bold">
           {buttonText}
         </button>
       </Link>
     </div>
-    <div style={{ marginLeft: "100px" }}>
+    <div className="d-none d-md-block" style={{ marginLeft: "100px" }}>
       <Image className={"carosel-images"} imgSrc={imgSrc} />
     </div>
   </div>
@@ -150,7 +150,7 @@ const Banner = () => {
       text: "Upgrade Your Riding Experience",
       Subtext:
         "Discover our premium horse saddles, designed for comfort and durability. Ride with style and confidence.",
-      buttonLink: "/offer",
+      buttonLink: "/shop",
       buttonText: "Shop Now",
     },
     {
@@ -159,15 +159,15 @@ const Banner = () => {
       Subtext:
         "Explore our collection of saddles made to suit all riding styles and preferences. Find the perfect fit for you and your horse.",
       buttonLink: "/shop",
-      buttonText: "About Us",
+      buttonText: "Shop Now",
     },
     {
       imgSrc: "https://res.cloudinary.com/it-s-tech/image/upload/v1730030603/horse-saddles/463988940_511029245145068_1804832544002803947_n_yplk3h.jpg",
       text: "Comfort Meets Performance",
       Subtext:
         "Experience the difference with our expertly crafted saddles. Enhance your ride with unmatched comfort and support.",
-      buttonLink: "/contact",
-      buttonText: "Contact Us",
+      buttonLink: "/shop",
+      buttonText: "Shop Now",
     },
 
     // Add more slides as needed

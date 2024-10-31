@@ -8,6 +8,7 @@ import {
 } from "../../redux/orebiSlice";
 
 const ItemCard = ({ item }) => {
+  console.log("item", item)
   const dispatch = useDispatch();
   return (
     <div className="w-full grid grid-cols-5 mb-4 border py-2">

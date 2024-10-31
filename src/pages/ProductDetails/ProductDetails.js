@@ -4,6 +4,7 @@ import ProductInfo from "../../components/pageProps/productDetails/ProductInfo";
 import supabase from "../../supabase";
 import { missingImage } from "../../assets/images";
 import BackButton from "../../components/buttons/backButton";
+import ProductCarousel from "../Dashboard/components/productCarousel";
 
 const ProductDetails = () => {
   const location = useLocation();
@@ -45,11 +46,11 @@ const ProductDetails = () => {
         </div>
         <div className="row">
           <div className="col-md-5 d-flex align-items-center">
-          { product.img_url ? <img className="w-full" src={product.img_url} alt="missing" /> 
+          { product.img_url ? <ProductCarousel images_urls={product.images_urls}/> 
             : <img className="w-full" src={missingImage} alt="missing" /> }
-            
           </div>
-          <div className="col-md-7">
+          
+          <div className="col-md-7"> 
             <ProductInfo productInfo={product} />
           </div>
         </div>

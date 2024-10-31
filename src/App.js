@@ -30,6 +30,8 @@ import Dashboard from "./pages/Dashboard/dashboard";
 import NewProductPage from "./pages/Dashboard/newProductPage";
 import EditProductPage from "./pages/Dashboard/editProductPage";
 import ProfilePage from "./pages/Profile/profilePage";
+import NewOrderPage from "./pages/Order/newOrderPage";
+import OrderShowPage from "./pages/Order/orderShowPage";
 
 const Layout = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -99,6 +101,9 @@ const router = createBrowserRouter(
         <Route path="/dashboard/products/new" element={<NewProductPage />}></Route>
         <Route path="/dashboard/products/:id/edit" element={<EditProductPage />}></Route>
         <Route path="/dashboard/profile/:id" element={<ProfilePage />}></Route>
+        <Route path="/new-order" element={<NewOrderPage />}></Route>
+        <Route path="/orders/:id" element={<OrderShowPage />} ></Route>
+
 
         {/* ==================== Header Navlink End here ===================== */}
         <Route path="/category/:category" element={<Offer />}></Route>

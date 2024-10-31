@@ -3,25 +3,20 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../../../redux/orebiSlice";
 
 const ProductInfo = ({ productInfo }) => {
-  console.log({ productInfo })
-
 
   const dispatch = useDispatch();
   return (
     <div className="">
       <h2 className="text-4xl font-semibold">{productInfo.name}</h2>
-      <p className="text-2xl font-semibold">
-        {productInfo.price} Dt
-        <span className="text-xl font-semibold line-through ml-2">540</span>
-        <span className="text-xs ml-2 inline-flex items-center px-3 py-1 rounded-full bg-green-600 text-white">
-          Save 100
-        </span>
+      <p className="text-2xl font-semibold">$
+        {productInfo.price}
+        <span className="text-xl font-semibold line-through ml-2">{productInfo.price_2}</span>
       </p>
       <hr />
       <div className="text-base text-gray-600">
         <ol>
           {productInfo.id && productInfo.description.split(",").map((d) => {
-            return <li className="my-2">{d}</li>
+            return <li className="my-2" key={d}>{d}</li>
           })}
         </ol>
 
@@ -79,24 +74,27 @@ const ProductInfo = ({ productInfo }) => {
           <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
         </svg>
       </div>
-      <button
-        onClick={() =>
-          dispatch(
-            addToCart({
-              _id: productInfo.id,
-              name: productInfo.name,
-              quantity: 1,
-              image: productInfo.img_url,
-              badge: productInfo.badge,
-              price: productInfo.price,
-              colors: productInfo.color,
-            })
-          )
-        }
-        className="w-full py-2 bg-blue-500 hover:bg-blue-600 duration-300 text-white text-lg font-titleFont"
-      >
-        Add to Cart
-      </button>
+      <div className="my-3">
+        <button
+          onClick={() =>
+            dispatch(
+              addToCart({
+                _id: productInfo.id,
+                name: productInfo.name,
+                quantity: 1,
+                image: productInfo.img_url,
+                badge: productInfo.badge,
+                price: productInfo.price,
+                colors: productInfo.color,
+              })
+            )
+          }
+          className="w-full py-2 bg-blue-500 hover:bg-blue-600 duration-300 text-white text-lg font-titleFont"
+        >
+          Add to Cart
+        </button>
+      </div>
+
     </div>
   );
 };

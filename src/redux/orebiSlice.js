@@ -84,7 +84,7 @@ export const orebiSlice = createSlice({
       } else {
         state.checkedCategorys.push(category);
       }
-    },
+    }, 
   },
 });
 
