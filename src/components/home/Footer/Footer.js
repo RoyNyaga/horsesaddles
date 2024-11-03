@@ -34,9 +34,18 @@ const Footer = () => {
           <FooterListTitle title=" More about Saddle Up Horse Shop" />
           <div className="flex flex-col gap-6">
             <p className="text-base w-full xl:w-[80%]">
-            Explore our collection of saddles made to suit all riding styles and preferences. Find the perfect fit for you and your horse.
+              Explore our collection of saddles made to suit all riding styles and preferences. Find the perfect fit for you and your horse.
             </p>
             <ul className="flex items-center gap-2">
+              <a
+                href="https://web.facebook.com/profile.php?id=61559180260189&mibextid=LQQJ4d&_rdc=1&_rdr"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <li className="w-7 h-7 bg-primeColor text-gray-100 hover:text-white cursor-pointer text-lg rounded-full flex justify-center items-center hover:bg-black duration-300">
+                  <FaFacebook />
+                </li>
+              </a>
               <a
                 href="https://www.youtube.com/@reactjsBD"
                 target="_blank"
@@ -55,15 +64,7 @@ const Footer = () => {
                   <FaGithub />
                 </li>
               </a>
-              <a
-                href="https://www.facebook.com/Noorlalu143/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <li className="w-7 h-7 bg-primeColor text-gray-100 hover:text-white cursor-pointer text-lg rounded-full flex justify-center items-center hover:bg-black duration-300">
-                  <FaFacebook />
-                </li>
-              </a>
+
               <a
                 href="https://www.linkedin.com/in/noor-mohammad-ab2245193/"
                 target="_blank"
@@ -80,19 +81,7 @@ const Footer = () => {
           <FooterListTitle title="Shop" />
           <ul className="flex flex-col gap-2">
             <li className="font-titleFont text-base text-lightText hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Accesories
-            </li>
-            <li className="font-titleFont text-base text-lightText hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Clothes
-            </li>
-            <li className="font-titleFont text-base text-lightText hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Electronics
-            </li>
-            <li className="font-titleFont text-base text-lightText hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Home appliances
-            </li>
-            <li className="font-titleFont text-base text-lightText hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              New Arrivals
+              Horse Saddles
             </li>
           </ul>
         </div>
@@ -105,23 +94,11 @@ const Footer = () => {
             <li className="font-titleFont text-base text-lightText hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
               Orders
             </li>
-            <li className="font-titleFont text-base text-lightText hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Addresses
-            </li>
-            <li className="font-titleFont text-base text-lightText hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Account Details
-            </li>
-            <li className="font-titleFont text-base text-lightText hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Payment Options
-            </li>
           </ul>
         </div>
         <div className="col-span-2 flex flex-col items-center w-full px-4">
           <FooterListTitle title="Subscribe to our newsletter." />
           <div className="w-full">
-            <p className="text-center mb-4">
-              A at pellentesque et mattis porta enim elementum.
-            </p>
             {subscription ? (
               <motion.p
                 initial={{ x: 20, opacity: 0 }}
@@ -157,9 +134,8 @@ const Footer = () => {
             )}
 
             <Image
-              className={`w-[80%] lg:w-[60%] mx-auto ${
-                subscription ? "mt-2" : "mt-6"
-              }`}
+              className={`w-[80%] lg:w-[60%] mx-auto ${subscription ? "mt-2" : "mt-6"
+                }`}
               imgSrc={paymentCard}
             />
           </div>

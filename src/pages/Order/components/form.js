@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import supabase from '../../../supabase';
 
 const Form = ({ profile, product_ids }) => {
   const url = new URL(window.location.href);
   const amount = url.searchParams.get("amount");        // "400"
   const deliveryFee = url.searchParams.get("deliver_fee"); // "25"
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     country: profile.country,
@@ -33,12 +35,17 @@ const Form = ({ profile, product_ids }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("form data", formData)
-    const { data, error } = await supabase.from('order_horsesaddle').insert([formData]);
+    const { data, error } = await supabase.from('order_horsesaddle')
+    .insert([formData])
+    .select();
     if (error) {
       console.error('Error inserting data:', error.message);
     } else {
-      console.log('Data inserted successfully:', data);
-      alert('Order placed successfully!');
+      navigate(`/orders/${data[0].id}`, {
+        state: {
+          order: data[0],
+        },
+      });
     }
   };
 

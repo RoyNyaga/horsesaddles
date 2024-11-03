@@ -22,9 +22,9 @@ const OrderCard = ({ order }) => {
       <div onClick={linkToOrderShowPage}>
         <p className='d-flex justify-content-between'><span>Planced on: </span> <span>{order.created_at}</span></p>
         <p className='d-flex justify-content-between'><span>Number of items: </span><span>{getTotalQuantity(order.product_ids)}</span></p>
-        <p className='d-flex justify-content-between'><span>Delivery fee: </span><span>{order.delivery_fee}</span></p>
-        <p className='d-flex justify-content-between'><span>Product cost: </span> <span>{order.amount}</span></p>
-        <p className='d-flex justify-content-between'><span>Total cost: </span><span>{order.total_amount}</span></p>
+        <p className='d-flex justify-content-between'><span>Delivery fee: </span><span>${order.delivery_fee}</span></p>
+        <p className='d-flex justify-content-between'><span>Product cost: </span> <span>${order.amount}</span></p>
+        <p className='d-flex justify-content-between'><span>Total cost: </span><span>${order.total_amount}</span></p>
       </div>
     </div>
   )

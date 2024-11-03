@@ -11,7 +11,6 @@ import FooterBottom from "./components/home/Footer/FooterBottom";
 import Header from "./components/home/Header/Header";
 import HeaderBottom from "./components/home/Header/HeaderBottom";
 import SpecialCase from "./components/SpecialCase/SpecialCase";
-import About from "./pages/About/About";
 import SignIn from "./pages/Account/SignIn";
 import SignUp from "./pages/Account/SignUp";
 import Cart from "./pages/Cart/Cart";
@@ -50,7 +49,7 @@ const Layout = () => {
   // Memoize setUserLogin to prevent re-creation on every render
   const setUserLogin = useCallback(async () => {
     const { data: { user } } = await supabase.auth.getUser();
-    console.log({ user });
+
     if (user) {
       setIsLoggedIn(true);
       setCurrentUser(user);
@@ -94,7 +93,6 @@ const router = createBrowserRouter(
         {/* ==================== Header Navlink Start here =================== */}
         <Route index element={<Home />}></Route>
         <Route path="/shop" element={<Shop />}></Route>
-        <Route path="/about" element={<About />}></Route>
         <Route path="/contact" element={<Contact />}></Route>
         <Route path="/journal" element={<Journal />}></Route>
         <Route path="/dashboard" element={<Dashboard />}></Route>
