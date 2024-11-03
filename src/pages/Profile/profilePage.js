@@ -6,7 +6,24 @@ import FormProfile from './formProfile';
 const ProfilePage = () => {
   const [profile, setProfile] = useState({});
   const [orders, setOrders] = useState([])
+  
+  const getOrders = useCallback(async (profile_id) => {
+    let { data: usersOrders, error } = await supabase
+      .from('order_horsesaddle')
+      .select("*")
+      .eq('profile_horsesadle_id', profile_id);
 
+    if (error) {
+      console.error("Error fetching profile:", error.message);
+      return;
+    }
+
+    if (usersOrders && usersOrders.length > 0) {
+      setOrders(usersOrders);
+    } else {
+      console.warn("Profile not found");
+    }
+  }, []);
   const getProfile = useCallback(async () => {
     const profile_id = parseInt(window.location.pathname.split("/")[3]);
     let { data: profileData, error } = await supabase
@@ -25,25 +42,7 @@ const ProfilePage = () => {
     } else {
       console.warn("Profile not found");
     }
-  }, []);
-
-  const getOrders = useCallback(async (profile_id) => {
-    let { data: usersOrders, error } = await supabase
-      .from('order_horsesaddle')
-      .select("*")
-      .eq('profile_horsesadle_id', profile_id);
-
-    if (error) {
-      console.error("Error fetching profile:", error.message);
-      return;
-    }
-
-    if (usersOrders && usersOrders.length > 0) {
-      setOrders(usersOrders);
-    } else {
-      console.warn("Profile not found");
-    }
-  }, []);
+  }, [getOrders]);
 
   useEffect(() => {
     getProfile();

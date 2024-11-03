@@ -3,15 +3,13 @@ import { motion } from "framer-motion";
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
 import { FaShoppingCart } from "react-icons/fa";
 import Flex from "../../designLayouts/Flex";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { paginationItems } from "../../../constants";
 import { BsSuitHeartFill } from "react-icons/bs";
 
 const HeaderBottom = () => {
   const products = useSelector((state) => state.orebiReducer.products);
   const [show, setShow] = useState(false);
-  const navigate = useNavigate();
   const ref = useRef();
   useEffect(() => {
     document.body.addEventListener("click", (e) => {
@@ -22,20 +20,6 @@ const HeaderBottom = () => {
       }
     });
   }, [show, ref]);
-
-  const [searchQuery, setSearchQuery] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState([]);
-
-  const handleSearch = (e) => {
-    setSearchQuery(e.target.value);
-  };
-
-  useEffect(() => {
-    const filtered = paginationItems.filter((item) =>
-      item.productName.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    setFilteredProducts(filtered);
-  }, [searchQuery]);
 
   return (
     <div className="w-full bg-[#F5F5F3] relative">

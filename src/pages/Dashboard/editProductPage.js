@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import { missingImage } from '../../assets/images';
 import supabase from '../../supabase';
 import AddPhotoForm from './components/photoAddForm';
 import ProductCarousel from './components/productCarousel';
