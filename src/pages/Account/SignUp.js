@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { logoLight } from "../../assets/images";
+import { logo } from "../../assets/images";
 import supabase from "../../supabase"
 
 const SignUp = () => {
@@ -115,29 +115,29 @@ const SignUp = () => {
         country &&
         zip
       ) {
-       console.log({ clientName, email, password, address, city, country, zip})
-       let signUpResponse = await supabase.auth.signUp({
-        email: email,
-        password: password
-      })
-      if (signUpResponse.data.user) {
-        const profileDataResponse = await supabase
-          .from('profile_horsesadle')
-          .insert([
-            {
-              full_name: clientName, phone_number: phone, email: email,
-              user_id: signUpResponse.data.user.id, address: address, city: city, country: country,
-              postal_code: zip,
-            },
-          ])
-          .select()
-  
-        console.log({ profileDataResponse })
-        if(!profileDataResponse.data.error){
-          window.location.href = "/"
+        console.log({ clientName, email, password, address, city, country, zip })
+        let signUpResponse = await supabase.auth.signUp({
+          email: email,
+          password: password
+        })
+        if (signUpResponse.data.user) {
+          const profileDataResponse = await supabase
+            .from('profile_horsesadle')
+            .insert([
+              {
+                full_name: clientName, phone_number: phone, email: email,
+                user_id: signUpResponse.data.user.id, address: address, city: city, country: country,
+                postal_code: zip,
+              },
+            ])
+            .select()
+
+          console.log({ profileDataResponse })
+          if (!profileDataResponse.data.error) {
+            window.location.href = "/"
+          }
+        } else {
         }
-      }else{
-      }
       }
     }
   };
@@ -146,13 +146,13 @@ const SignUp = () => {
       <div className="w-1/2 hidden lgl:inline-flex h-full text-white">
         <div className="w-[450px] h-full bg-primeColor px-10 flex flex-col gap-6 justify-center">
           <Link to="/">
-            <img src={logoLight} alt="logoImg" className="w-28" />
+            <img src={logo} alt="logoImg" className="w-28" />
           </Link>
           <div className="flex flex-col gap-1 -mt-1">
             <h1 className="font-titleFont text-xl font-medium">
-              Get started for free
+              Stay sign in for more
             </h1>
-            <p className="text-base">Create your account to access more</p>
+            <p className="text-base">When you sign in, you are with us!</p>
           </div>
           <div className="w-[300px] flex items-start gap-3">
             <span className="text-green-500 mt-1">
@@ -160,11 +160,9 @@ const SignUp = () => {
             </span>
             <p className="text-base text-gray-300">
               <span className="text-white font-semibold font-titleFont">
-                Get started fast with OREBI
+                Get started fast with SaddleUpHorse
               </span>
               <br />
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab omnis
-              nisi dolor recusandae consectetur!
             </p>
           </div>
           <div className="w-[300px] flex items-start gap-3">
@@ -173,11 +171,9 @@ const SignUp = () => {
             </span>
             <p className="text-base text-gray-300">
               <span className="text-white font-semibold font-titleFont">
-                Access all OREBI services
+                Access all SaddleUpHorse services
               </span>
               <br />
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab omnis
-              nisi dolor recusandae consectetur!
             </p>
           </div>
           <div className="w-[300px] flex items-start gap-3">
@@ -189,14 +185,14 @@ const SignUp = () => {
                 Trusted by online Shoppers
               </span>
               <br />
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab omnis
-              nisi dolor recusandae consectetur!
             </p>
           </div>
           <div className="flex items-center justify-between mt-10">
-            <p className="text-sm font-titleFont font-semibold text-gray-300 hover:text-white cursor-pointer duration-300">
-              © OREBI
-            </p>
+            <Link to="/">
+              <p className="text-sm font-titleFont font-semibold text-gray-300 hover:text-white cursor-pointer duration-300">
+                © SADDLEUPHORSE
+              </p>
+            </Link>
             <p className="text-sm font-titleFont font-semibold text-gray-300 hover:text-white cursor-pointer duration-300">
               Terms
             </p>
@@ -210,199 +206,198 @@ const SignUp = () => {
         </div>
       </div>
       <div className="w-full lgl:w-[500px] h-full flex flex-col justify-center">
-          <form className="w-full lgl:w-[500px] h-screen flex items-center justify-center">
-            <div className="px-6 py-4 w-full h-[96%] flex flex-col justify-start overflow-y-scroll scrollbar-thin scrollbar-thumb-primeColor">
-              <h1 className="font-titleFont underline underline-offset-4 decoration-[1px] font-semibold text-2xl mdl:text-3xl mb-4">
-                Create your account
-              </h1>
-              <div className="flex flex-col gap-3">
-                {/* client name */}
-                <div className="flex flex-col gap-.5">
-                  <p className="font-titleFont text-base font-semibold text-gray-600">
-                    Full Name
+        <form className="w-full lgl:w-[500px] h-screen flex items-center justify-center">
+          <div className="px-6 py-4 w-full h-[96%] flex flex-col justify-start overflow-y-scroll scrollbar-thin scrollbar-thumb-primeColor">
+            <h1 className="font-titleFont underline underline-offset-4 decoration-[1px] font-semibold text-2xl mdl:text-3xl mb-4">
+              Create your account
+            </h1>
+            <div className="flex flex-col gap-3">
+              {/* client name */}
+              <div className="flex flex-col gap-.5">
+                <p className="font-titleFont text-base font-semibold text-gray-600">
+                  Full Name
+                </p>
+                <input
+                  onChange={handleName}
+                  value={clientName}
+                  className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
+                  type="text"
+                  placeholder="eg. John Doe"
+                />
+                {errClientName && (
+                  <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                    <span className="font-bold italic mr-1">!</span>
+                    {errClientName}
                   </p>
-                  <input
-                    onChange={handleName}
-                    value={clientName}
-                    className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                    type="text"
-                    placeholder="eg. John Doe"
-                  />
-                  {errClientName && (
-                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                      <span className="font-bold italic mr-1">!</span>
-                      {errClientName}
-                    </p>
-                  )}
-                </div>
-                {/* Email */}
-                <div className="flex flex-col gap-.5">
-                  <p className="font-titleFont text-base font-semibold text-gray-600">
-                    Work Email
+                )}
+              </div>
+              {/* Email */}
+              <div className="flex flex-col gap-.5">
+                <p className="font-titleFont text-base font-semibold text-gray-600">
+                  Work Email
+                </p>
+                <input
+                  onChange={handleEmail}
+                  value={email}
+                  className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
+                  type="email"
+                  placeholder="john@workemail.com"
+                />
+                {errEmail && (
+                  <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                    <span className="font-bold italic mr-1">!</span>
+                    {errEmail}
                   </p>
-                  <input
-                    onChange={handleEmail}
-                    value={email}
-                    className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                    type="email"
-                    placeholder="john@workemail.com"
-                  />
-                  {errEmail && (
-                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                      <span className="font-bold italic mr-1">!</span>
-                      {errEmail}
-                    </p>
-                  )}
-                </div>
-                {/* Phone Number */}
-                <div className="flex flex-col gap-.5">
-                  <p className="font-titleFont text-base font-semibold text-gray-600">
-                    Phone Number
+                )}
+              </div>
+              {/* Phone Number */}
+              <div className="flex flex-col gap-.5">
+                <p className="font-titleFont text-base font-semibold text-gray-600">
+                  Phone Number
+                </p>
+                <input
+                  onChange={handlePhone}
+                  value={phone}
+                  className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
+                  type="text"
+                  placeholder="008801234567891"
+                />
+                {errPhone && (
+                  <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                    <span className="font-bold italic mr-1">!</span>
+                    {errPhone}
                   </p>
-                  <input
-                    onChange={handlePhone}
-                    value={phone}
-                    className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                    type="text"
-                    placeholder="008801234567891"
-                  />
-                  {errPhone && (
-                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                      <span className="font-bold italic mr-1">!</span>
-                      {errPhone}
-                    </p>
-                  )}
-                </div>
-                {/* Password */}
-                <div className="flex flex-col gap-.5">
-                  <p className="font-titleFont text-base font-semibold text-gray-600">
-                    Password
+                )}
+              </div>
+              {/* Password */}
+              <div className="flex flex-col gap-.5">
+                <p className="font-titleFont text-base font-semibold text-gray-600">
+                  Password
+                </p>
+                <input
+                  onChange={handlePassword}
+                  value={password}
+                  className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
+                  type="password"
+                  placeholder="Create password"
+                />
+                {errPassword && (
+                  <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                    <span className="font-bold italic mr-1">!</span>
+                    {errPassword}
                   </p>
-                  <input
-                    onChange={handlePassword}
-                    value={password}
-                    className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                    type="password"
-                    placeholder="Create password"
-                  />
-                  {errPassword && (
-                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                      <span className="font-bold italic mr-1">!</span>
-                      {errPassword}
-                    </p>
-                  )}
-                </div>
-                {/* Address */}
-                <div className="flex flex-col gap-.5">
-                  <p className="font-titleFont text-base font-semibold text-gray-600">
-                    Address
+                )}
+              </div>
+              {/* Address */}
+              <div className="flex flex-col gap-.5">
+                <p className="font-titleFont text-base font-semibold text-gray-600">
+                  Address
+                </p>
+                <input
+                  onChange={handleAddress}
+                  value={address}
+                  className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
+                  type="text"
+                  placeholder="road-001, house-115, example area"
+                />
+                {errAddress && (
+                  <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                    <span className="font-bold italic mr-1">!</span>
+                    {errAddress}
                   </p>
-                  <input
-                    onChange={handleAddress}
-                    value={address}
-                    className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                    type="text"
-                    placeholder="road-001, house-115, example area"
-                  />
-                  {errAddress && (
-                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                      <span className="font-bold italic mr-1">!</span>
-                      {errAddress}
-                    </p>
-                  )}
-                </div>
-                {/* City */}
-                <div className="flex flex-col gap-.5">
-                  <p className="font-titleFont text-base font-semibold text-gray-600">
-                    City
+                )}
+              </div>
+              {/* City */}
+              <div className="flex flex-col gap-.5">
+                <p className="font-titleFont text-base font-semibold text-gray-600">
+                  City
+                </p>
+                <input
+                  onChange={handleCity}
+                  value={city}
+                  className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
+                  type="text"
+                  placeholder="Your city"
+                />
+                {errCity && (
+                  <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                    <span className="font-bold italic mr-1">!</span>
+                    {errCity}
                   </p>
-                  <input
-                    onChange={handleCity}
-                    value={city}
-                    className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                    type="text"
-                    placeholder="Your city"
-                  />
-                  {errCity && (
-                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                      <span className="font-bold italic mr-1">!</span>
-                      {errCity}
-                    </p>
-                  )}
-                </div>
-                {/* Country */}
-                <div className="flex flex-col gap-.5">
-                  <p className="font-titleFont text-base font-semibold text-gray-600">
-                    Country
+                )}
+              </div>
+              {/* Country */}
+              <div className="flex flex-col gap-.5">
+                <p className="font-titleFont text-base font-semibold text-gray-600">
+                  Country
+                </p>
+                <input
+                  onChange={handleCountry}
+                  value={country}
+                  className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
+                  type="text"
+                  placeholder="Your country"
+                />
+                {errCountry && (
+                  <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                    <span className="font-bold italic mr-1">!</span>
+                    {errCountry}
                   </p>
-                  <input
-                    onChange={handleCountry}
-                    value={country}
-                    className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                    type="text"
-                    placeholder="Your country"
-                  />
-                  {errCountry && (
-                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                      <span className="font-bold italic mr-1">!</span>
-                      {errCountry}
-                    </p>
-                  )}
-                </div>
-                {/* Zip code */}
-                <div className="flex flex-col gap-.5">
-                  <p className="font-titleFont text-base font-semibold text-gray-600">
-                    Zip/Postal code
+                )}
+              </div>
+              {/* Zip code */}
+              <div className="flex flex-col gap-.5">
+                <p className="font-titleFont text-base font-semibold text-gray-600">
+                  Zip/Postal code
+                </p>
+                <input
+                  onChange={handleZip}
+                  value={zip}
+                  className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
+                  type="text"
+                  placeholder="Your country"
+                />
+                {errZip && (
+                  <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                    <span className="font-bold italic mr-1">!</span>
+                    {errZip}
                   </p>
-                  <input
-                    onChange={handleZip}
-                    value={zip}
-                    className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
-                    type="text"
-                    placeholder="Your country"
-                  />
-                  {errZip && (
-                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                      <span className="font-bold italic mr-1">!</span>
-                      {errZip}
-                    </p>
-                  )}
-                </div>
-                {/* Checkbox */}
-                <div className="flex items-start mdl:items-center gap-2">
-                  <input
-                    onChange={() => setChecked(!checked)}
-                    className="w-4 h-4 mt-1 mdl:mt-0 cursor-pointer"
-                    type="checkbox"
-                  />
-                  <p className="text-sm text-primeColor">
-                    I agree to the OREBI{" "}
-                    <span className="text-blue-500">Terms of Service </span>and{" "}
-                    <span className="text-blue-500">Privacy Policy</span>.
-                  </p>
-                </div>
-                <button
-                  onClick={handleSignUp}
-                  className={`${
-                    checked
-                      ? "bg-primeColor hover:bg-black hover:text-white cursor-pointer"
-                      : "bg-gray-500 hover:bg-gray-500 hover:text-gray-200 cursor-none"
-                  } w-full text-gray-200 text-base font-medium h-10 rounded-md hover:text-white duration-300`}
-                >
-                  Create Account
-                </button>
-                <p className="text-sm text-center font-titleFont font-medium">
-                  Don't have an Account?{" "}
-                  <Link to="/signin">
-                    <span className="hover:text-blue-600 duration-300">
-                      Sign in
-                    </span>
-                  </Link>
+                )}
+              </div>
+              {/* Checkbox */}
+              <div className="flex items-start mdl:items-center gap-2">
+                <input
+                  onChange={() => setChecked(!checked)}
+                  className="w-4 h-4 mt-1 mdl:mt-0 cursor-pointer"
+                  type="checkbox"
+                />
+                <p className="text-sm text-primeColor">
+                  I agree to the OREBI{" "}
+                  <span className="text-blue-500">Terms of Service </span>and{" "}
+                  <span className="text-blue-500">Privacy Policy</span>.
                 </p>
               </div>
+              <button
+                onClick={handleSignUp}
+                className={`${checked
+                    ? "bg-primeColor hover:bg-black hover:text-white cursor-pointer"
+                    : "bg-gray-500 hover:bg-gray-500 hover:text-gray-200 cursor-none"
+                  } w-full text-gray-200 text-base font-medium h-10 rounded-md hover:text-white duration-300`}
+              >
+                Create Account
+              </button>
+              <p className="text-sm text-center font-titleFont font-medium">
+                Don't have an Account?{" "}
+                <Link to="/signin">
+                  <span className="hover:text-blue-600 duration-300">
+                    Sign in
+                  </span>
+                </Link>
+              </p>
             </div>
-          </form>
-        
+          </div>
+        </form>
+
       </div>
     </div>
   );
