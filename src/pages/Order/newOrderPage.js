@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import supabase from '../../supabase';
 import Form from './components/form';
