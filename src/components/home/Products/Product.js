@@ -36,7 +36,7 @@ const Product = ({ dHoverDetails = false, isAdmin=false, ...props }) => {
           {props.badge && <Badge text="New" />}
         </div>
         {dHoverDetails && <HoverDetail _id={props.id}
-          img={props.img_url}
+          img={props.img}
           productName={props.name}
           price={props.price}
           color={props.color}
@@ -44,6 +44,8 @@ const Product = ({ dHoverDetails = false, isAdmin=false, ...props }) => {
           des={props.description} 
           handleProductDetails={handleProductDetails}/>}
       </div>
+
+      
       <div className="max-w-80 py-6 flex flex-col gap-1 border-[1px] border-t-0 px-4">
         <div className="flex items-center justify-between font-titleFont">
           <h2 className="text-lg text-primeColor font-bold">

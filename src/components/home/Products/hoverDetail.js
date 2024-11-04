@@ -21,7 +21,7 @@ function HoverDetail(props) {
                 image: props.img,
                 badge: props.badge,
                 price: props.price,
-                colors: props.color,
+                colors: props.color, 
               })
             )
           }
