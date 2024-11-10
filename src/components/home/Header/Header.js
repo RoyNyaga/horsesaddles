@@ -144,16 +144,16 @@ const Header = ({ isLoggedIn, user, profile }) => {
                       }
 
                       {isLoggedIn ?
-                        <Link
-                          className="flex font-normal text-white"
-                          to={"/"}>LogOut</Link>
+                        <span onClick={() => signOutUser()} className="h-6 px-12 text-base hover:underline underline-offset-[4px] decoration-[1px] hover:text-[#262626] md:border-r-[2px] border-r-gray-300 hoverEffect">
+                          Log Out
+                        </span>
                         :
                         <NavLink
                           to={"/signin"}
                           state={{ data: location.pathname.split("/")[1] }}
                           onClick={() => setSidenav(false)}
                         >
-                          "signin"
+                          Login
                         </NavLink>
                       }
                     </ul>
