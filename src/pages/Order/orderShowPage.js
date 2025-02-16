@@ -81,7 +81,16 @@ const OrderShowPage = () => {
               </tbody>
             </table>
 
-
+            <div>
+              <p>Address Info</p>
+              <p>Country: {order.country}</p>
+              <p>State: {order.state}</p>
+              <p>City: {order.city}</p>
+              <p>Address: {order.address}</p>
+              <p>Name: {order.full_name}</p>
+              <p>Email: {order.email_address}</p>
+              <p>phone: ({order.country_code}) {order.phone_number}</p>
+            </div>
 
           </div>
         </div>

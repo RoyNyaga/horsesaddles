@@ -22,6 +22,10 @@ const Dashboard = () => {
       <div className='row'>
         <div className='col-md-2 p-2 text-center'>
           <Link to="/dashboard/products/new" className='btn btn-secondary'>New Product</Link>
+          <br />
+          <br />
+
+          <Link to="/orders" className='btn btn-secondary'>See Orders</Link>
         </div>
         <div className='col-md-8'>
           <div className='row'>
